@@ -1,0 +1,49 @@
+name: "⏰ Feature Pipeline — Runs Every Hour"
+# Per PDF: "Create a CI/CD pipeline that automatically runs
+# the feature script every hour"
+
+on:
+  schedule:
+    - cron: "0 * * * *"     # Every hour — runs even when you're offline
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "normal or backfill"
+        default: "normal"
+        type: choice
+        options: [normal, backfill]
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r backend/requirements.txt
+
+      - name: Run feature pipeline
+        env:
+          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+          HOPSWORKS_API_KEY:   ${{ secrets.HOPSWORKS_API_KEY }}
+          HOPSWORKS_PROJECT:   ${{ secrets.HOPSWORKS_PROJECT }}
+          CITY:     karachi
+          CITY_LAT: "24.8607"
+          CITY_LON: "67.0011"
+        run: |
+          cd backend
+          if [ "${{ github.event.inputs.mode }}" = "backfill" ]; then
+            echo "🔄 Backfill mode — generating 90 days of history..."
+            python src/backfill.py
+          else
+            echo "⏰ Hourly collection — $(date -u)"
+            python src/feature_pipeline.py
+          fi
+
+      - run: echo "✅ Done at $(date -u)"

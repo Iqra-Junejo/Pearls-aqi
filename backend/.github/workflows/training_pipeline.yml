@@ -1,0 +1,45 @@
+name: "🤖 Training Pipeline — Runs Every Day"
+# Per PDF: "Create a CI/CD pipeline that automatically runs
+# the training script every day"
+
+on:
+  schedule:
+    - cron: "0 21 * * *"   # 9PM UTC = 2AM PKT — runs every night
+  workflow_dispatch:
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r backend/requirements.txt
+
+      - name: Train 12 models (4 models × 3 horizons)
+        env:
+          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+          HOPSWORKS_API_KEY:   ${{ secrets.HOPSWORKS_API_KEY }}
+          HOPSWORKS_PROJECT:   ${{ secrets.HOPSWORKS_PROJECT }}
+        run: |
+          cd backend
+          echo "🤖 Training started — $(date -u)"
+          python src/training_pipeline.py
+          echo "✅ Training complete — $(date -u)"
+
+      - name: Show training summary
+        run: |
+          [ -f backend/models/training_summary.json ] && cat backend/models/training_summary.json || echo "No summary yet"
+
+      - name: Upload models as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: aqi-models-${{ github.run_number }}
+          path: backend/models/
+          retention-days: 30

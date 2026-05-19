@@ -1,0 +1,6 @@
+[install]
+# Bun config — faster & safer than npm
+auto = "local"
+
+[run]
+bun = true

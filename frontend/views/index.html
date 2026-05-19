@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pearls AQI — Karachi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Playfair Display = closest free match to Stardom's thick/thin drama -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+
+<!-- ░░ CURSOR ░░ -->
+<div class="cur"    id="cur"></div>
+<div class="cur-f"  id="curF"></div>
+
+<!-- ░░ LOADER ░░ -->
+<div class="loader" id="loader">
+  <div class="ldr-wrap">
+    <div class="ldr-logo">
+      <svg width="34" height="34" viewBox="0 0 28 28" fill="none">
+        <path d="M7 19.5C4.515 19.5 2.5 17.485 2.5 15c0-2.17 1.548-3.986 3.613-4.403C6.674 8.342 8.487 7 10.6 7c.776 0 1.506.202 2.136.555A6.2 6.2 0 0 1 18.8 11.5c0 .124-.005.247-.014.369A3.15 3.15 0 0 1 18.4 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="18.4" cy="10.2" r="3.6" stroke="currentColor" stroke-width="1.6"/>
+        <line x1="18.4" y1="7.8" x2="18.4" y2="11.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="18.4" cy="13" r="0.9" fill="currentColor"/>
+      </svg>
+    </div>
+    <p class="ldr-name">Pearls AQI</p>
+    <div class="ldr-bar"><div class="ldr-fill" id="ldrFill"></div></div>
+    <p class="ldr-pct" id="ldrPct">0%</p>
+  </div>
+</div>
+
+<!-- ░░ NAV ░░ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-icon">
+        <svg width="16" height="16" viewBox="0 0 28 28" fill="none">
+          <path d="M7 19.5C4.515 19.5 2.5 17.485 2.5 15c0-2.17 1.548-3.986 3.613-4.403C6.674 8.342 8.487 7 10.6 7c.776 0 1.506.202 2.136.555A6.2 6.2 0 0 1 18.8 11.5c0 .124-.005.247-.014.369A3.15 3.15 0 0 1 18.4 18" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+          <circle cx="18.4" cy="10.2" r="3.6" stroke="currentColor" stroke-width="1.9"/>
+          <line x1="18.4" y1="7.8" x2="18.4" y2="11.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+          <circle cx="18.4" cy="13" r="0.9" fill="currentColor"/>
+        </svg>
+      </span>
+      Pearls AQI
+    </a>
+    <div class="nav-links">
+      <a href="#dashboard" class="nav-a">Dashboard</a>
+      <a href="#forecast"  class="nav-a">Forecast</a>
+      <a href="#analytics" class="nav-a">Analytics</a>
+    </div>
+    <div class="nav-right">
+      <span class="nav-live"><span class="nl-dot"></span>Live · Karachi</span>
+      <span class="nav-time" id="navTime">—</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ░░░░░░░░░░░░░░░░░
+     HERO
+░░░░░░░░░░░░░░░░░ -->
+<section class="hero">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+
+  <div class="hero-inner">
+
+    <!-- eyebrow -->
+    <div class="hero-eye">
+      <span class="hero-eye-line" id="heroEyeLine"></span>
+      <span class="hero-eye-txt reveal-fade" id="heroEyeTxt">Air Quality Index · Karachi, Pakistan · Real-Time</span>
+    </div>
+
+    <!-- BIG headline — each word pops from behind a mask -->
+    <h1 class="hero-h1">
+      <span class="word-row">
+        <span class="wmask"><span class="win hero-w1">Know</span></span>
+        <span class="wmask"><span class="win hero-w2">the</span></span>
+        <span class="wmask"><span class="win hero-w3">Air.</span></span>
+      </span>
+      <span class="word-row row2">
+        <span class="wmask"><span class="win hero-w4"><em>Predict.</em></span></span>
+        <span class="wmask"><span class="win hero-w5">Protect.</span></span>
+      </span>
+    </h1>
+
+    <!-- drawing rule -->
+    <div class="hero-rule reveal-rule" id="heroRule"></div>
+
+    <!-- live data strip -->
+    <div class="hero-strip reveal-up" id="heroStrip" style="--d:.55s">
+      <div class="hstrip-col">
+        <span class="hstrip-lbl">Current AQI</span>
+        <span class="hstrip-val big" id="hAqi" style="color:var(--usg)">—</span>
+      </div>
+      <div class="hstrip-div"></div>
+      <div class="hstrip-col">
+        <span class="hstrip-lbl">Status</span>
+        <span class="hstrip-status" id="hStatus">—</span>
+      </div>
+      <div class="hstrip-div"></div>
+      <div class="hstrip-col">
+        <span class="hstrip-lbl">PM2.5 µg/m³</span>
+        <span class="hstrip-val" id="hPm">—</span>
+      </div>
+      <div class="hstrip-div"></div>
+      <div class="hstrip-col">
+        <span class="hstrip-lbl">Temperature</span>
+        <span class="hstrip-val" id="hTemp">—</span>
+      </div>
+      <div class="hstrip-div"></div>
+      <div class="hstrip-col">
+        <span class="hstrip-lbl">Humidity</span>
+        <span class="hstrip-val" id="hHum">—</span>
+      </div>
+    </div>
+
+    <!-- bottom row: sub + CTA -->
+    <div class="hero-foot reveal-up" id="heroFoot" style="--d:.75s">
+      <p class="hero-sub">ML-powered 3-day AQI forecasting for Karachi —<br>updated hourly, explained with SHAP.</p>
+      <div class="hero-btns">
+        <a href="#dashboard" class="hbtn-fill">View Dashboard</a>
+        <a href="#forecast"  class="hbtn-ghost">3-Day Forecast →</a>
+      </div>
+    </div>
+
+  </div><!-- /hero-inner -->
+
+  <div class="hero-scroll">
+    <div class="hs-bar"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- alert -->
+<div class="alert-band" id="alertBand" style="display:none">
+  <div class="alert-inner">
+    <span class="ab-dot"></span>
+    <span id="alertTxt">—</span>
+    <button onclick="this.closest('.alert-band').style.display='none'">✕</button>
+  </div>
+</div>
+
+<!-- ░░░░░░░░░░░░░░░░░
+     STATS TICKER
+░░░░░░░░░░░░░░░░░ -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="tick-item"><span class="tick-n" data-to="62">0</span><span class="tick-l">Features Engineered</span></div>
+    <div class="tick-sep"></div>
+    <div class="tick-item"><span class="tick-n" data-to="4">0</span><span class="tick-l">ML Models</span></div>
+    <div class="tick-sep"></div>
+    <div class="tick-item"><span class="tick-n" data-to="12">0</span><span class="tick-l">Models Trained Daily</span></div>
+    <div class="tick-sep"></div>
+    <div class="tick-item"><span class="tick-n" data-to="180">0</span><span class="tick-l">Days Historical Data</span></div>
+    <div class="tick-sep"></div>
+    <div class="tick-item"><span class="tick-n" data-to="24">0</span><span class="tick-l">Hourly Updates</span></div>
+  </div>
+</div>
+
+<!-- ░░░░░░░░░░░░░░░░░
+     DASHBOARD
+░░░░░░░░░░░░░░░░░ -->
+<section class="section" id="dashboard">
+  <div class="sec-head">
+    <span class="sec-eyebrow" data-reveal-tag>— Live Data</span>
+    <h2 class="sec-h2" data-split-words>Air Quality Dashboard</h2>
+    <div class="sec-rule" data-rule></div>
+  </div>
+
+  <div class="dash-grid">
+
+    <!-- gauge card -->
+    <div class="card c-gauge" data-clip>
+      <div class="card-lbl">Live Index</div>
+      <div class="gauge-wrap">
+        <svg class="g-svg" viewBox="0 0 200 115">
+          <defs>
+            <linearGradient id="gG" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="#22c55e"/>
+              <stop offset="30%"  stop-color="#eab308"/>
+              <stop offset="57%"  stop-color="#f97316"/>
+              <stop offset="80%"  stop-color="#ef4444"/>
+              <stop offset="100%" stop-color="#a855f7"/>
+            </linearGradient>
+          </defs>
+          <path d="M18 100 A82 82 0 0 1 182 100" fill="none" stroke="rgba(240,234,214,.05)" stroke-width="11" stroke-linecap="round"/>
+          <path id="gArc" d="M18 100 A82 82 0 0 1 182 100" fill="none" stroke="url(#gG)" stroke-width="11" stroke-linecap="round" stroke-dasharray="257" stroke-dashoffset="257" style="transition:stroke-dashoffset 1.8s cubic-bezier(.16,1,.3,1)"/>
+          <g id="gNeedle" style="transform-origin:100px 100px;transform:rotate(-90deg);transition:transform 1.8s cubic-bezier(.16,1,.3,1)">
+            <line x1="100" y1="100" x2="100" y2="26" stroke="#f0ead6" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="100" cy="100" r="4.5" fill="#f0ead6"/>
+          </g>
+        </svg>
+        <div class="g-center">
+          <span class="g-num" id="gNum">—</span>
+          <span class="g-lbl">US AQI</span>
+        </div>
+      </div>
+      <p class="g-status" id="gStatus">—</p>
+      <p class="g-face"   id="gFace">—</p>
+      <div class="g-scale">
+        <span style="color:#22c55e">Good</span>
+        <span style="color:#eab308">Mod</span>
+        <span style="color:#f97316">USG</span>
+        <span style="color:#ef4444">Bad</span>
+        <span style="color:#a855f7">V.Bad</span>
+      </div>
+    </div>
+
+    <!-- env card -->
+    <div class="card c-env" data-clip style="--cd:.08s">
+      <div class="card-lbl">Environmental</div>
+      <div class="env-grid">
+        <div class="env-t"><span class="et-i">🌡️</span><span class="et-v" id="eTemp">—</span><span class="et-l">Temp °C</span></div>
+        <div class="env-t"><span class="et-i">💧</span><span class="et-v" id="eHum">—</span><span class="et-l">Humidity %</span></div>
+        <div class="env-t"><span class="et-i">🌬️</span><span class="et-v" id="eWind">—</span><span class="et-l">Wind km/h</span></div>
+        <div class="env-t"><span class="et-i">📊</span><span class="et-v" id="ePres">—</span><span class="et-l">Pressure hPa</span></div>
+      </div>
+    </div>
+
+    <!-- pollutants -->
+    <div class="card c-poll" data-clip style="--cd:.16s">
+      <div class="card-lbl">Pollutants</div>
+      <div id="pollList"></div>
+    </div>
+
+    <!-- trend -->
+    <div class="card c-trend" data-clip style="--cd:.12s">
+      <div class="card-row">
+        <span class="card-lbl m0">24-Hour Trend</span>
+        <span class="t-range" id="tRange">—</span>
+      </div>
+      <div style="height:182px;position:relative;margin-top:.8rem">
+        <canvas id="trendChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░
+     FORECAST
+░░░░░░░░░░░░░░░░░ -->
+<section class="section" id="forecast">
+  <div class="sec-head">
+    <span class="sec-eyebrow" data-reveal-tag>— ML Predictions</span>
+    <h2 class="sec-h2" data-split-words>3-Day Forecast</h2>
+    <div class="sec-rule" data-rule></div>
+  </div>
+  <div class="model-row">
+    <span class="mr-lbl">Model —</span>
+    <div class="mr-btns">
+      <button class="mbtn on" data-model="lgbm">LightGBM ⚡</button>
+      <button class="mbtn" data-model="xgb">XGBoost</button>
+      <button class="mbtn" data-model="rf">Random Forest</button>
+      <button class="mbtn" data-model="ridge">Ridge</button>
+    </div>
+  </div>
+  <div class="fc-grid" id="fcGrid"></div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░
+     WATCHLIST
+░░░░░░░░░░░░░░░░░ -->
+<section class="section">
+  <div class="sec-head">
+    <span class="sec-eyebrow" data-reveal-tag>— Global</span>
+    <h2 class="sec-h2" data-split-words>City Watchlist</h2>
+    <div class="sec-rule" data-rule></div>
+  </div>
+  <div class="wl-grid" id="wlGrid"></div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░
+     ANALYTICS
+░░░░░░░░░░░░░░░░░ -->
+<section class="section" id="analytics">
+  <div class="sec-head">
+    <span class="sec-eyebrow" data-reveal-tag>— Explainability</span>
+    <h2 class="sec-h2" data-split-words>Feature Importance</h2>
+    <div class="sec-rule" data-rule></div>
+  </div>
+  <div class="an-grid">
+    <div class="card" data-clip>
+      <div class="card-lbl">SHAP Values</div>
+      <div class="shap-leg">
+        <span><b class="sl p"></b>Increases AQI</span>
+        <span><b class="sl n"></b>Decreases AQI</span>
+      </div>
+      <div id="shapBars"></div>
+    </div>
+    <div class="card" data-clip style="--cd:.1s">
+      <div class="card-lbl">Model Performance</div>
+      <div id="metsGrid" class="mets-grid"></div>
+      <p class="mets-note">4 models × 3 horizons = 12 trained daily. Best model per day auto-selected via GitHub Actions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░
+     HEALTH
+░░░░░░░░░░░░░░░░░ -->
+<section class="section">
+  <div class="sec-head">
+    <span class="sec-eyebrow" data-reveal-tag>— Advisory</span>
+    <h2 class="sec-h2" data-split-words>Health Recommendations</h2>
+    <div class="sec-rule" data-rule></div>
+  </div>
+  <div class="tips-grid" id="tipsGrid"></div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░
+     FOOTER
+░░░░░░░░░░░░░░░░░ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="ft-logo">
+          <div class="ft-icon">
+            <svg width="14" height="14" viewBox="0 0 28 28" fill="none">
+              <path d="M7 19.5C4.515 19.5 2.5 17.485 2.5 15c0-2.17 1.548-3.986 3.613-4.403C6.674 8.342 8.487 7 10.6 7c.776 0 1.506.202 2.136.555A6.2 6.2 0 0 1 18.8 11.5c0 .124-.005.247-.014.369A3.15 3.15 0 0 1 18.4 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="18.4" cy="10.2" r="3.6" stroke="currentColor" stroke-width="2"/>
+              <line x1="18.4" y1="7.8" x2="18.4" y2="11.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="18.4" cy="13" r="0.9" fill="currentColor"/>
+            </svg>
+          </div>
+          <span class="ft-name">Pearls AQI</span>
+        </div>
+        <p class="ft-desc">End-to-end ML pipeline for real-time AQI forecasting in Karachi. Data via OpenWeather. Models retrained daily via GitHub Actions CI/CD.</p>
+      </div>
+      <div class="ft-col">
+        <p class="ft-col-h">Stack</p>
+        <span class="ft-li">OpenWeather API</span>
+        <span class="ft-li">MongoDB Atlas</span>
+        <span class="ft-li">LightGBM · XGBoost · RF</span>
+        <span class="ft-li">Node.js · Flask</span>
+        <span class="ft-li">GitHub Actions</span>
+      </div>
+      <div class="ft-col">
+        <p class="ft-col-h">Navigate</p>
+        <a href="#dashboard" class="ft-li">Dashboard</a>
+        <a href="#forecast"  class="ft-li">Forecast</a>
+        <a href="#analytics" class="ft-li">Analytics</a>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-copy">© 2025 Pearls AQI · Data Science Internship</span>
+      <div class="ft-dev">
+        <span class="ft-by">Developed by</span>
+        <strong class="ft-devname">Iqra Junejo</strong>
+        <span class="ft-badge">Data Science Intern</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="/js/particles.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

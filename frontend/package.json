@@ -1,0 +1,13 @@
+{
+  "name": "pearls-aqi-frontend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "bun server.js",
+    "dev":   "bun --hot server.js"
+  },
+  "dependencies": {
+    "express":    "^4.19.2",
+    "node-fetch": "^3.3.2"
+  }
+}

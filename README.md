@@ -205,7 +205,7 @@ Every Day at 2AM PKT:
 
 <div align="center">
 
-**Pearls AQI · 10Pearls Data Science Internship · 2025**
-Built with ❤️ by **Iqra Junejo** · Karachi, Pakistan
+**Pearls AQI · 10Pearls Data Science Internship · 2026 Cohort-8**
+Built by **Iqra Junejo** · Karachi, Pakistan
 
 </div>

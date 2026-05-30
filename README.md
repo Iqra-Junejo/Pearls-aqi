@@ -172,6 +172,19 @@ GitHub repo → Actions tab → you'll see hourly + daily runs
 ```
 
 ---
+## Model Performance
+
+Models trained on 2,160 records (90-day backfill + live hourly data).
+5 models evaluated per horizon: Ridge, Random Forest, LightGBM, XGBoost, LSTM (TensorFlow).
+
+| Model | Horizon | RMSE | MAE | R² | Acc±15 |
+|-------|---------|------|-----|----|--------|
+| XGBoost ⭐ | 24h | 11.81 | 9.65 | 0.035 | 77.6% |
+| Random Forest ⭐ | 48h | 11.81 | 9.53 | 0.034 | 78.7% |
+| LSTM ⭐ | 72h | 12.02 | 9.74 | 0.003 | 78.5% |
+
+> Best model per horizon selected automatically by RMSE.
+> R² is low due to synthetic backfill baseline — accuracy improves as live hourly data accumulates.
 
 ## 🤖 What Runs Automatically (CI/CD)
 

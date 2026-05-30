@@ -1,20 +1,18 @@
-name: "🤖 Training Pipeline — Runs Every Day"
-# Per PDF: "Create a CI/CD pipeline that automatically runs
-# the training script every day"
+name: "Training Pipeline — Runs Every Day"
 
 on:
   schedule:
-    - cron: "0 21 * * *"   # 9PM UTC = 2AM PKT — runs every night
+    - cron: "0 21 * * *"   # 9PM UTC = 2AM PKT
   workflow_dispatch:
 
 jobs:
   train:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5.4.0
         with:
           python-version: "3.11"
           cache: pip
@@ -22,14 +20,17 @@ jobs:
       - name: Install dependencies
         run: pip install -r backend/requirements.txt
 
-      - name: Train 12 models (4 models × 3 horizons)
+      - name: Train models (Ridge, RF, LightGBM, XGBoost, LSTM)
         env:
           OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
           HOPSWORKS_API_KEY:   ${{ secrets.HOPSWORKS_API_KEY }}
           HOPSWORKS_PROJECT:   ${{ secrets.HOPSWORKS_PROJECT }}
+          CITY:     karachi
+          CITY_LAT: "24.8607"
+          CITY_LON: "67.0011"
         run: |
           cd backend
-          echo "🤖 Training started — $(date -u)"
+          echo "Training started — $(date -u)"
           python src/training_pipeline.py
           echo "✅ Training complete — $(date -u)"
 

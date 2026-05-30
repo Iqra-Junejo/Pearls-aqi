@@ -1,10 +1,8 @@
-name: "⏰ Feature Pipeline — Runs Every Hour"
-# Per PDF: "Create a CI/CD pipeline that automatically runs
-# the feature script every hour"
+name: "Feature Pipeline — Runs Every Hour"
 
 on:
   schedule:
-    - cron: "0 * * * *"     # Every hour — runs even when you're offline
+    - cron: "0 * * * *"
   workflow_dispatch:
     inputs:
       mode:
@@ -18,9 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5.4.0
         with:
           python-version: "3.11"
           cache: pip
@@ -39,11 +37,11 @@ jobs:
         run: |
           cd backend
           if [ "${{ github.event.inputs.mode }}" = "backfill" ]; then
-            echo "🔄 Backfill mode — generating 90 days of history..."
+            echo "Backfill mode — generating 90 days of history..."
             python src/backfill.py
           else
-            echo "⏰ Hourly collection — $(date -u)"
+            echo "Hourly collection — $(date -u)"
             python src/feature_pipeline.py
           fi
 
-      - run: echo "✅ Done at $(date -u)"
+      - run: echo "Done at $(date -u)"

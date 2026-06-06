@@ -215,7 +215,8 @@ Every Day at 2AM PKT:
 - ✅ Model Registry (Hopsworks)
 
 ---
-
+## EDA Notebook
+Full exploratory data analysis available in `backend/notebooks/eda.ipynb`
 <div align="center">
 
 **Pearls AQI · 10Pearls Data Science Internship · 2026 Cohort-8**

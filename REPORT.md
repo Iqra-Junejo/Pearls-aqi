@@ -210,6 +210,7 @@ Alert thresholds follow US EPA AQI guidelines.
 - Add email/SMS alerts for hazardous AQI levels
 - Integrate AQICN API for additional data source validation
 - Retrain with accumulated real live data for improved R²
+- Add LIME explainability as alternative to SHAP for comparison
 
 ---
 

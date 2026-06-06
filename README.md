@@ -170,7 +170,12 @@ git push
 ```
 GitHub repo → Actions tab → you'll see hourly + daily runs
 ```
-
+## Cloud Architecture
+- Feature Store: Hopsworks (free tier)
+- Model Registry: Hopsworks (free tier)
+- CI/CD: GitHub Actions (hourly + daily)
+- Dashboard: Streamlit Cloud
+- Data: OpenWeather API
 ---
 ## Model Performance
 

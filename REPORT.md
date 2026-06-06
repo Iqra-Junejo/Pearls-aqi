@@ -1,5 +1,5 @@
 # Pearls AQI Predictor — Project Report
-**10Pearls Shine Program 2025 | Iqra Junejo | Jinnah University for Women, Karachi**
+**10Pearls Shine Program 2026 | Iqra Junejo | Jinnah University for Women, Karachi**
 
 ---
 

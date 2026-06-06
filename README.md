@@ -229,7 +229,8 @@ Every Day at 2AM PKT:
 Full exploratory data analysis available in `backend/notebooks/eda.ipynb`
 <div align="center">
 
-**Pearls AQI · 10Pearls Data Science Internship · 2026 Cohort-8**
-Built by **Iqra Junejo** · Karachi, Pakistan
+## Author
+**Iqra Junejo** — Data Science Intern, 10Pearls Shine Program 2026, cohort-8
+Jinnah University for Women, Karachi
 
 </div>

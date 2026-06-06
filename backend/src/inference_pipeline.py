@@ -95,7 +95,7 @@ def _compute_shap(bundle, X):
         log.warning(f"SHAP failed: {e}")
         return _mock_shap()
 
-
+# Returns real SHAP values when model is loaded, mock values as fallback
 def _mock_shap():
     return [
         {"label": "PM2.5",    "shap_value": 42.1},

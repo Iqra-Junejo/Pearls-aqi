@@ -4,7 +4,7 @@
 ![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub_Actions-green)
 
 # 🌫️ Pearls AQI Predictor
-### 10Pearls Data Science Internship Project — 2025
+### 10Pearls Data Science Shine Internship Project — 2026, cohort-8
 
 > Predict Air Quality Index (AQI) for Karachi 3 days ahead using a 100% serverless ML stack.
 

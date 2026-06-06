@@ -1,3 +1,5 @@
+# Pearls AQI Predictor — Central Configuration
+# 10Pearls Shine Program 2025
 """config.py — Central config for Pearls AQI Backend"""
 import os
 from dotenv import load_dotenv

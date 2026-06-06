@@ -140,7 +140,7 @@ SHAP (SHapley Additive exPlanations) is used to explain individual predictions:
 - Features with positive SHAP values increase AQI prediction; negative values decrease it
 
 Typical top features: PM2.5, AQI lag features, hour of day, humidity, wind speed.
-
+SHAP values are computed at inference time for every prediction request.
 ---
 
 ## 7. CI/CD Automation

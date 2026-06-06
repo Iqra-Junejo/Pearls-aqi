@@ -4,7 +4,7 @@ Standalone dashboard — calls OpenWeather API directly.
 Deployable on Streamlit Cloud without a separate Flask backend.
 
 Set secrets in Streamlit Cloud:
-  OPENWEATHER_API_KEY = "your_key"
+  OPENWEATHER_API_KEY = "0c270cf70633e3a22d5da2e68ee55380"
 """
 
 import math
@@ -156,9 +156,9 @@ cat_label, cat_color = get_category(aqi)
 # ── Alert ─────────────────────────────────────────────
 if aqi > 150:
     msg = {
-        300: f"🚨 HAZARDOUS air (AQI={aqi}). Stay indoors. Avoid ALL outdoor activity.",
-        200: f"⚠️ Very Unhealthy air (AQI={aqi}). Avoid outdoor activity. Close windows.",
-        150: f"⚠️ Unhealthy air (AQI={aqi}). Reduce outdoor exertion. Wear N95 mask.",
+        300: f"HAZARDOUS air (AQI={aqi}). Stay indoors. Avoid ALL outdoor activity.",
+        200: f"Very Unhealthy air (AQI={aqi}). Avoid outdoor activity. Close windows.",
+        150: f"Unhealthy air (AQI={aqi}). Reduce outdoor exertion. Wear N95 mask.",
     }
     for threshold, m in msg.items():
         if aqi > threshold:
@@ -266,7 +266,7 @@ else:
 st.markdown("---")
 
 # ── Pollutant Breakdown ───────────────────────────────
-st.subheader("🧪 Pollutant Breakdown")
+st.subheader("Pollutant Breakdown")
 col_p1, col_p2 = st.columns(2)
 
 pollutants = {

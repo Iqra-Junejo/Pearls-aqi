@@ -14,7 +14,7 @@
 
 **👩‍💻 Developed by Iqra Junejo**
 **Data Science Intern — 10Pearls**
-Karachi, Pakistan · 2025
+Karachi, Pakistan · 2026
 
 </div>
 

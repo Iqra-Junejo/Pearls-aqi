@@ -4,7 +4,7 @@ Standalone dashboard — calls OpenWeather API directly.
 Deployable on Streamlit Cloud without a separate Flask backend.
 
 Set secrets in Streamlit Cloud:
-  OPENWEATHER_API_KEY = "0c270cf70633e3a22d5da2e68ee55380"
+  OPENWEATHER_API_KEY = ""
 """
 
 import math

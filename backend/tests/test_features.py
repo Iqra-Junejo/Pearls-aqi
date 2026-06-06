@@ -95,6 +95,10 @@ def test_feature_engineering_with_history():
     assert features["aqi_lag_1"] == 90
     assert features["aqi_lag_2"] == 85
 
+    
+def test_aqi_category_very_unhealthy():
+    cat = get_aqi_category(250)
+    assert cat["label"] == "Very Unhealthy"
 
 # ── Helpers ───────────────────────────────────────────
 

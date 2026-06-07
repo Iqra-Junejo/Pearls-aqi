@@ -1,6 +1,6 @@
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.15-orange)
-![Streamlit](https://img.shields.io/badge/Streamlit-deployed-red)
+![Streamlit](https://img.shields.io/badge/Streamlit-dashboard-red)
 ![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub_Actions-green)
 
 # Pearls AQI Predictor

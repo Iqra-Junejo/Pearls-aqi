@@ -7,7 +7,7 @@
 
 The Pearls AQI Predictor is an end-to-end serverless machine learning system that forecasts Air Quality Index (AQI) for Karachi across three horizons: 24 hours, 48 hours, and 72 hours ahead. The system is fully automated, cloud-native, and production-grade — built entirely on free-tier services.
 
-**Live Dashboard:** [View on Streamlit Cloud](https://pearls-aqi.streamlit.app)  
+
 **Repository:** [github.com/Iqra-Junejo/Pearls-aqi](https://github.com/Iqra-Junejo/Pearls-aqi)
 
 ---

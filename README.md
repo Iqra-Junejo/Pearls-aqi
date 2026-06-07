@@ -12,7 +12,7 @@
 
 <div align="center">
 
-**👩‍💻 Developed by Iqra Junejo**
+**Developed by Iqra Junejo**
 **Data Science Intern — 10Pearls**
 Karachi, Pakistan · 2026
 
@@ -20,7 +20,7 @@ Karachi, Pakistan · 2026
 
 ---
 
-## 📐 Architecture (from project PDF)
+## Architecture (from project PDF)
 
 ```
 Weather & Pollution API (OpenWeather)
@@ -88,7 +88,7 @@ Pearls-aqi/
 
 ---
 
-## 🔑 API Keys Needed (both FREE)
+## API Keys Needed (both FREE)
 
 | Service | URL | What it gives you |
 |---|---|---|
@@ -97,7 +97,7 @@ Pearls-aqi/
 
 ---
 
-## ⚙️ Setup & Run
+## Setup & Run
 
 ### Backend
 ```bash
@@ -139,7 +139,7 @@ bun run dev                   # → http://localhost:3000
 
 ---
 
-## 🐙 Git Setup Commands
+## Git Setup Commands
 
 ### First time — create repo and push everything:
 ```bash
@@ -196,7 +196,7 @@ Models trained on 2,160 records (90-day backfill + live hourly data).
 > Best model per horizon selected automatically by RMSE.
 > R² is low due to synthetic backfill baseline — accuracy improves as live hourly data accumulates.
 
-## 🤖 What Runs Automatically (CI/CD)
+## What Runs Automatically (CI/CD)
 
 ```
 Every Hour — even when you're offline or sleeping:
@@ -212,7 +212,7 @@ Every Day at 2AM PKT:
 
 ---
 
-## 📊 Deliverables (per PDF requirements)
+## Deliverables (per PDF requirements)
 
 - ✅ End-to-end AQI prediction system
 - ✅ Scalable automated pipeline (GitHub Actions)
